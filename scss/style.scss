@@ -1,0 +1,40 @@
+$blackColor: black;
+$redColor: red;
+$lightBlueColor: lightblue;
+$customLightCyanColor: rgb(167, 251, 251);
+$customLightGreyColor: hsl(0, 0%, 96%);
+
+
+.navbar {
+    background-color: $customLightCyanColor;
+    width: 100%;
+    display: block;
+
+    h4 {
+        color: $blackColor;
+        font-weight: bold;
+        text-align: center;
+        padding-left: 50%;
+        padding-right: 50%;
+    }
+}
+
+// .nav-link {
+//     color: $blackColor;
+//     font-weight: bold;
+// }
+
+.hotel-div {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.delete-item {
+    color: $redColor;
+}
+
+table {
+    tr {
+        background-color: $customLightGreyColor;
+    }
+}
