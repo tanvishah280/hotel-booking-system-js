@@ -6,12 +6,10 @@ class Hotel {
 
             const hotel = await hotelResponse.data;
 
-            console.log(hotel);
-            console.log(hotel.hotel_name);
+            // console.log(hotel);
+            // console.log(hotel[0].hotel_name);
 
-            return {
-                hotel
-            }
+            return hotel;
         } catch(error) {
             console.log(error);
         }

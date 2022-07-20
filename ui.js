@@ -1,19 +1,15 @@
 class UI {
-    constructor() {
-        this.hotelList = document.getElementById('hotel-list');
-        // this.totalHotels = document.querySelector('.total-hotels');
-    }
-
     // Display hotel list in UI
-    showHotelList() {
+    showHotelList(hotel) {
         let output = '';
-        let hotels;
 
-        hotels.forEach(function (hotel) {
+        const hotelList = document.getElementById('hotel-list');
+
+        hotel.forEach(function (hotel) {
             // Create tr element
             const row = document.createElement('tr');
 
-            output += `<td>${hotel.hotel_name}</td>
+            output = `<td>${hotel.hotel_name}</td>
             <td>${hotel.hotel_location}</td>
             <td>${hotel.hotel_phone}</td>
             <td>${hotel.hotel_email}</td>
@@ -24,14 +20,13 @@ class UI {
                 <a href="#" class="delete secondary-content"><i class="delete-item fa fa-xmark"></i></a>
             </td>`;
 
-            console.log(hotel.hotel_name);
+            // console.log(hotel);
 
             // Insert cols
             row.innerHTML = output;
 
             // append row
-            this.hotelList.appendChild(row);
-
+            hotelList.appendChild(row);
         });
     }
 }
