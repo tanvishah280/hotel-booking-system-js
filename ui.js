@@ -115,6 +115,13 @@ class UI {
             row7.id = 'hotel-form-table-row';
 
             // create td element
+            const backBtnData = document.createElement('td');
+
+            // // Create tr element
+            // const row8 = document.createElement('tr');
+            // row8.id = 'hotel-form-table-row';
+
+            // create td element
             const addBtnData = document.createElement('td');
 
             // create an input element for hotel name
@@ -175,7 +182,7 @@ class UI {
             // create an input element for Pet Friendly
             const petFriendly = document.createElement('input');
             petFriendly.type = 'checkbox';
-            petFriendly.value = 'value';
+            // petFriendly.value = 'value';
             petFriendly.id = 'pet_friendly';
 
             // Create label for checkbox - Pet Friendly
@@ -186,6 +193,12 @@ class UI {
 
             // create a text node & append it to label
             petFriendlyLabel.appendChild(document.createTextNode('Pet Friendly'));
+
+            // create a back button
+            const backBtn = document.createElement('input');
+            backBtn.type = 'button';
+            backBtn.value = 'Back';
+            backBtn.id = 'back-btn';
 
             // create a submit button
             const addBtn = document.createElement('input');
@@ -237,6 +250,8 @@ class UI {
 
             // appending add button to table
             table.appendChild(row7);
+            row7.appendChild(backBtnData);
+            backBtnData.appendChild(backBtn);
             row7.appendChild(addBtnData);
             addBtnData.appendChild(addBtn);
 
@@ -244,21 +259,22 @@ class UI {
         });
     }
 
-    // show alert method
-    showAlert(message, className) {
-        // create div
-        const div = document.createElement('div');
-        // Add classes
-        div.className = `alert ${className}`;
-        // Add text 
-        div.appendChild(document.createTextNode(message));
-        // Get parent
-        const hotelDiv = document.querySelector('.hotel-div');
-        // Get form
-        const form = document.getElementById('hotel-add-form');
-        // Insert alert before form
-        hotelDiv.insertBefore(div, form);
-    }
+    // // show alert method
+    // showAlert(message, className) {
+    //     // create div
+    //     const div = document.createElement('div');
+    //     // Add classes
+    //     div.className = `alert ${className}`;
+    //     // Add text 
+    //     div.appendChild(document.createTextNode(message));
+    //     // Get parent
+    //     // const hotelDiv = document.querySelector('.hotel-div');
+    //     const container = document.querySelector('.hotel-div');
+    //     // Get form
+    //     const form = document.getElementById('hotel-add-form');
+    //     // Insert alert before form
+    //     container.insertBefore(div, form);
+    // }
 
     // Clear fields
     clearFields() {
@@ -268,5 +284,17 @@ class UI {
         document.getElementById('hotel_email').value = '';
         document.getElementById('hotel_rating').value = '';
         document.getElementById('pet_friendly').value = '';
+    }
+
+    // Remove add icon
+    clearAddIcon() {
+        document.querySelector('#add-icon').style.display = 'none';
+    }
+
+    // remove Form
+    removeForm() {
+        document.getElementById('hotel-add-form').style.display = 'none';
+        document.querySelector('.table').style.display = 'block';
+        document.querySelector('#add-icon').style.display = 'block';
     }
 }

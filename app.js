@@ -15,43 +15,45 @@ function getHotelList() {
     }).catch(err => console.log(err));
 }
 
+// call add hotel form method of UI 
 ui.addHotelForm();
 
 // const hotelDiv = document.querySelector('.hotel-div');
 // const lastChild = hotelDiv.lastElementChild.firstElementChild;
 // console.log(lastChild);
 
-// const submitHotelForm = document.getElementById('add-btn');
-
-
-
-
 // Event listener for add hotel
 document.addEventListener('click', (event) => {
 
-    // console.log(event.target);
+    // console.log(event);
+    ui.clearAddIcon();
+
     // Get form values
     const hotel_name = document.getElementById('hotel_name'),
         hotel_location = document.getElementById('hotel_location'),
         hotel_phone = document.getElementById('hotel_phone'),
         hotel_email = document.getElementById('hotel_email'),
         hotel_rating = document.getElementById('hotel_rating'),
-        pet_friendly = document.getElementById('pet_friendly:checked') != null;
-
-    // console.log(hotel_name.value);
-    // console.log(pet_friendly);
+        pet_friendly = document.getElementById('pet_friendly');
 
     let target = event.target;
 
-    if (!target.matches('#add-btn')) {
-        return;
-    } else if (hotel_name === '' || hotel_location === '' || hotel_phone === '' || hotel_email === '' || hotel_rating === '') {
-        ui.showAlert('Please fill in all fields', 'error');
-    } else {
-        addHotel();
+    if (target.matches('#back-btn')) {
+        ui.removeForm();
+        getHotelList();
 
-        // clear fields
-        ui.clearFields();
+    } else if (target.matches('#add-btn')) {
+        // return;
+        if (hotel_name === '' || hotel_location === '' || hotel_phone === '' || hotel_email === '' || hotel_rating === '') {
+
+            // ui.showAlert('Please fill in all fields', 'error');
+        } else {
+
+            addHotel();
+
+            // clear fields
+            ui.clearFields();
+        }
     }
     event.preventDefault();
 })
@@ -59,17 +61,16 @@ document.addEventListener('click', (event) => {
 
 // addHotel function
 function addHotel() {
-    const hotel = {
+    const hotelData = {
         hotel_name: hotel_name.value,
         hotel_location: hotel_location.value,
         hotel_phone: hotel_phone.value,
         hotel_email: hotel_email.value,
         hotel_rating: hotel_rating.value,
-        pet_friendly: pet_friendly
+        pet_friendly: pet_friendly.checked
     };
-    hotel.addHotel(hotel).then(response => {
+    console.log('app.js hotelData', hotelData);
+    hotel.addHotel(hotelData).then(response => {
         console.log(response);
     }).catch(err => console.log(err));
-
-    getHotelList();
 }

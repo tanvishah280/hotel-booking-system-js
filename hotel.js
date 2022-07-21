@@ -15,15 +15,15 @@ class Hotel {
         }
     }
 
-    async addHotel(hotel) {
+    async addHotel(hotelData) {
         try {
-            const response = await axios.post(`http://localhost:8080/hotelbookingsystem/hotels`, {
-                data: hotel
-            }, {
+            const response = await axios.post(`http://localhost:8080/hotelbookingsystem/hotels`,
+                hotelData, {
                 headers: {
                     'Content-type': 'application/json'
                 }
             });
+            console.log(response);
             return response;
         } catch (error) {
             console.log(error);
