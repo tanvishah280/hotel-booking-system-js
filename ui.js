@@ -67,55 +67,55 @@ class UI {
             row1.id = 'hotel-form-table-row';
 
             // create td element
-            const data1 = document.createElement('td');
-            const data2 = document.createElement('td');
+            const nameDataLabel = document.createElement('td');
+            const nameDataInput = document.createElement('td');
 
             // Create tr element
             const row2 = document.createElement('tr');
             row2.id = 'hotel-form-table-row';
 
             // create td element
-            const data3 = document.createElement('td');
-            const data4 = document.createElement('td');
+            const locationDataLabel = document.createElement('td');
+            const locationDataInput = document.createElement('td');
 
             // Create tr element
             const row3 = document.createElement('tr');
             row3.id = 'hotel-form-table-row';
 
             // create td element
-            const data5 = document.createElement('td');
-            const data6 = document.createElement('td');
+            const phoneDataLabel = document.createElement('td');
+            const phoneDataInput = document.createElement('td');
 
             // Create tr element
             const row4 = document.createElement('tr');
             row4.id = 'hotel-form-table-row';
 
             // create td element
-            const data7 = document.createElement('td');
-            const data8 = document.createElement('td');
+            const emailDataLabel = document.createElement('td');
+            const emailDataInput = document.createElement('td');
 
             // Create tr element
             const row5 = document.createElement('tr');
             row5.id = 'hotel-form-table-row';
 
             // create td element
-            const data9 = document.createElement('td');
-            const data10 = document.createElement('td');
+            const ratingDataLabel = document.createElement('td');
+            const ratingDataInput = document.createElement('td');
 
             // Create tr element
             const row6 = document.createElement('tr');
             row6.id = 'hotel-form-table-row';
 
             // create td element
-            const data11 = document.createElement('td');
-            const data12 = document.createElement('td');
+            const petFriendlyDataLabel = document.createElement('td');
+            const petFriendlyDataInput = document.createElement('td');
 
             // Create tr element
             const row7 = document.createElement('tr');
             row7.id = 'hotel-form-table-row';
 
             // create td element
-            const data13 = document.createElement('td');
+            const addBtnData = document.createElement('td');
 
             // create an input element for hotel name
             const hotelName = document.createElement('input');
@@ -200,45 +200,45 @@ class UI {
             // appending row to table
             table.appendChild(row1);
             // appending data, input & label element
-            row1.appendChild(data1);
-            data1.appendChild(hotelNameLabel);
-            row1.appendChild(data2);
-            data2.appendChild(hotelName);
+            row1.appendChild(nameDataLabel);
+            nameDataLabel.appendChild(hotelNameLabel);
+            row1.appendChild(nameDataInput);
+            nameDataInput.appendChild(hotelName);
 
             table.appendChild(row2);
-            row2.appendChild(data3);
-            data3.appendChild(hotelLocationLabel);
-            row2.appendChild(data4);
-            data4.appendChild(hotelLocation);
+            row2.appendChild(locationDataLabel);
+            locationDataLabel.appendChild(hotelLocationLabel);
+            row2.appendChild(locationDataInput);
+            locationDataInput.appendChild(hotelLocation);
 
             table.appendChild(row3);
-            row3.appendChild(data5);
-            data5.appendChild(hotelPhoneLabel);
-            row3.appendChild(data6);
-            data6.appendChild(hotelPhone);
+            row3.appendChild(phoneDataLabel);
+            phoneDataLabel.appendChild(hotelPhoneLabel);
+            row3.appendChild(phoneDataInput);
+            phoneDataInput.appendChild(hotelPhone);
 
             table.appendChild(row4);
-            row4.appendChild(data7);
-            data7.appendChild(hotelEmailLabel);
-            row4.appendChild(data8);
-            data8.appendChild(hotelEmail);
+            row4.appendChild(emailDataLabel);
+            emailDataLabel.appendChild(hotelEmailLabel);
+            row4.appendChild(emailDataInput);
+            emailDataInput.appendChild(hotelEmail);
 
             table.appendChild(row5);
-            row5.appendChild(data9);
-            data9.appendChild(hotelRatingLabel);
-            row5.appendChild(data10);
-            data10.appendChild(hotelRating);
+            row5.appendChild(ratingDataLabel);
+            ratingDataLabel.appendChild(hotelRatingLabel);
+            row5.appendChild(ratingDataInput);
+            ratingDataInput.appendChild(hotelRating);
 
             table.appendChild(row6);
-            row6.appendChild(data11);
-            data11.appendChild(petFriendlyLabel);
-            row6.appendChild(data12);
-            data12.appendChild(petFriendly);
+            row6.appendChild(petFriendlyDataLabel);
+            petFriendlyDataLabel.appendChild(petFriendlyLabel);
+            row6.appendChild(petFriendlyDataInput);
+            petFriendlyDataInput.appendChild(petFriendly);
 
             // appending add button to table
             table.appendChild(row7);
-            row7.appendChild(data13);
-            data13.appendChild(addBtn);
+            row7.appendChild(addBtnData);
+            addBtnData.appendChild(addBtn);
 
             // addIcon.style.display = 'none';
         });
@@ -258,5 +258,15 @@ class UI {
         const form = document.getElementById('hotel-add-form');
         // Insert alert before form
         hotelDiv.insertBefore(div, form);
+    }
+
+    // Clear fields
+    clearFields() {
+        document.getElementById('hotel_name').value = '';
+        document.getElementById('hotel_location').value = '';
+        document.getElementById('hotel_phone').value = '';
+        document.getElementById('hotel_email').value = '';
+        document.getElementById('hotel_rating').value = '';
+        document.getElementById('pet_friendly').value = '';
     }
 }
