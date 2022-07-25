@@ -29,4 +29,19 @@ class Hotel {
             console.log(error);
         }
     }
+
+    async editHotel(hotelData) {
+        try {
+            const response = await axios.put(`http://localhost:8080/hotelbookingsystem/hotels/${hotelData.hotel_id}`,
+                hotelData, {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+            console.log('hotel id: ',hotelData.hotel_id);
+            return response;
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }

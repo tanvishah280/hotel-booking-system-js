@@ -1,4 +1,7 @@
 class UI {
+    constructor() {
+        this.forState = 'add';
+    }
     // Display hotel list in UI
     showHotelList(hotel) {
         let output = '';
@@ -16,7 +19,8 @@ class UI {
             const row = document.createElement('tr');
             row.id = 'list-row';
 
-            output = `<td>${hotel.hotel_name}</td>
+            output = `<td style="display: none;" id="id">${hotel.hotel_id}</td>
+            <td>${hotel.hotel_name}</td>
             <td>${hotel.hotel_location}</td>
             <td>${hotel.hotel_phone}</td>
             <td>${hotel.hotel_email}</td>
@@ -44,13 +48,34 @@ class UI {
     }
 
     // Add new hotel
-    addHotelForm() {
+    addHotelForm(event) {
+        // console.log('inside addhotelForm function');
+
+        let editClass;
+        let resultIcon = document.querySelector('.add');
+
+        if (event !== undefined) {
+            // editClass = `.${event.target.className}`;
+            resultIcon = document.querySelector('.edit-item');
+            // resultIcon = event.target.className;
+
+            console.log('Event target: ', event.target.className);
+        }
+
+        // console.log('EditClass: ', `${editClass}`);
+        console.log('resultIcon ', resultIcon);
+        console.log('EVENT: ',event);
+        // console.log('Edit: ', document.querySelector(`${editClass}`));
 
         const hotelDiv = document.querySelector('.hotel-div');
+        const addIcon = document.querySelector('.add');
 
-        const addIcon = document.querySelector('.add').addEventListener('click', () => {
+        resultIcon.addEventListener('click', () => {
+            console.log('Before resultIcon log');
+
             document.querySelector('.table').style.display = 'none';
 
+            console.log('inside resultIcon');
             // create a break line element
             const br = document.createElement('br');
 
@@ -61,6 +86,14 @@ class UI {
             // create form element
             const form = document.createElement('form');
             form.id = 'hotel-add-form';
+
+            // Create tr element
+            const row = document.createElement('tr');
+            row.id = 'hotel-form-table-row-id';
+
+            // create td element
+            const idDataLabel = document.createElement('td');
+            const idDataInput = document.createElement('td');
 
             // Create tr element
             const row1 = document.createElement('tr');
@@ -123,6 +156,12 @@ class UI {
 
             // create td element
             const addBtnData = document.createElement('td');
+
+            // create an input element for hotel name
+            const hotelId = document.createElement('input');
+            hotelId.type = 'hidden';
+            hotelId.placeholder = 'Hotel ID';
+            hotelId.id = 'hotel_id';
 
             // create an input element for hotel name
             const hotelName = document.createElement('input');
@@ -194,24 +233,16 @@ class UI {
             // create a text node & append it to label
             petFriendlyLabel.appendChild(document.createTextNode('Pet Friendly'));
 
-            // create a back button
-            const backBtn = document.createElement('input');
-            backBtn.type = 'button';
-            backBtn.value = 'Back';
-            backBtn.id = 'back-btn';
-
-            // create a submit button
-            const addBtn = document.createElement('input');
-            addBtn.type = 'submit';
-            addBtn.value = 'Add Hotel';
-            addBtn.id = 'add-btn';
-
             // appending form to div
             hotelDiv.appendChild(form);
             // appending table to form
             form.appendChild(table);
             // appending row to table
             table.appendChild(row1);
+
+            table.appendChild(row);
+
+            row.appendChild(hotelId);
             // appending data, input & label element
             row1.appendChild(nameDataLabel);
             nameDataLabel.appendChild(hotelNameLabel);
@@ -248,14 +279,45 @@ class UI {
             row6.appendChild(petFriendlyDataInput);
             petFriendlyDataInput.appendChild(petFriendly);
 
+            // this.changeFormState('add', table);
             // appending add button to table
             table.appendChild(row7);
-            row7.appendChild(backBtnData);
-            backBtnData.appendChild(backBtn);
-            row7.appendChild(addBtnData);
-            addBtnData.appendChild(addBtn);
+            if (event === undefined) {
+                // create a back button
+                const backBtn = document.createElement('input');
+                backBtn.type = 'button';
+                backBtn.value = 'Back';
+                backBtn.id = 'back-btn';
 
-            // addIcon.style.display = 'none';
+                // create a submit button
+                const addBtn = document.createElement('input');
+                addBtn.type = 'submit';
+                addBtn.value = 'Add Hotel';
+                addBtn.id = 'add-btn';
+
+                row7.appendChild(backBtnData);
+                backBtnData.appendChild(backBtn);
+                row7.appendChild(addBtnData);
+                addBtnData.appendChild(addBtn);
+            } else {
+                const cancelBtn = document.createElement('input');
+                cancelBtn.type = 'button';
+                cancelBtn.value = 'Cancel';
+                cancelBtn.id = 'cancel-btn';
+
+                // create a update button
+                const updateBtn = document.createElement('input');
+                updateBtn.type = 'submit';
+                updateBtn.value = 'Update Hotel';
+                updateBtn.id = 'update-btn';
+
+                row7.appendChild(backBtnData);
+                backBtnData.appendChild(cancelBtn);
+                row7.appendChild(addBtnData);
+                addBtnData.appendChild(updateBtn);
+            }
+            // appending add button to table
+            // table.appendChild(row7);
         });
     }
 
@@ -299,13 +361,80 @@ class UI {
         document.getElementById('hotel_phone').value = '';
         document.getElementById('hotel_email').value = '';
         document.getElementById('hotel_rating').value = '';
-        document.getElementById('pet_friendly').value = '';
+        document.getElementById('pet_friendly').checked = '';
     }
 
     // Remove add icon
     clearAddIcon() {
         document.querySelector('#add-icon').style.display = 'none';
     }
+
+
+    // Fill form to edit
+    fillForm(hotelData) {
+        // document.getElementsByName('input');
+        // console.log(document.getElementById('hotel_name'));
+        // document.getElementById('hotel_name').value = hotelData.hotel_name;
+        // document.getElementById('hotel_location').value = hotelData.hotel_location;
+        // document.getElementById('hotel_phone').value = hotelData.hotel_phone;
+        // document.getElementById('hotel_email').value = hotelData.hotel_email;
+        // document.getElementById('hotel_rating').value = hotelData.hotel_rating;
+        // document.getElementById('pet_friendly').checked = hotelData.pet_friendly;
+
+        // this.changeFormState('edit');
+    }
+
+    // Change the form state
+    // changeFormState(type, table) {
+    //     if (type === 'edit') {
+    //         // document.querySelector('#add-btn').textContent = 'Update Hotel';
+    //         // document.querySelector('#back-btn').textContent = 'Cancel Edit';
+    //         // create a cancel button
+    //         // const cancelBtn = document.createElement('button');
+    //         // cancelBtn.className = 'cancel btn';
+    //         // cancelBtn.appendChild(document.createTextNode('Cancel Edit'));
+
+    //         const cancelBtn = document.createElement('button');
+    //         cancelBtn.type = 'button';
+    //         cancelBtn.value = 'Cancel';
+    //         cancelBtn.id = 'cancel-btn';
+
+    //         // create a update button
+    //         const updateBtn = document.createElement('button');
+    //         updateBtn.type = 'submit';
+    //         updateBtn.value = 'Update Hotel';
+    //         updateBtn.id = 'update-btn';
+
+    //         // appending add button to table
+    //         table.appendChild(row7);
+    //         row7.appendChild(backBtnData);
+    //         backBtnData.appendChild(cancelBtn);
+    //         row7.appendChild(addBtnData);
+    //         addBtnData.appendChild(updateBtn);
+    //     } else {
+    //         // create a back button
+    //         const backBtn = document.createElement('button');
+    //         backBtn.type = 'button';
+    //         backBtn.value = 'Back';
+    //         backBtn.id = 'back-btn';
+
+    //         // create a submit button
+    //         const addBtn = document.createElement('button');
+    //         addBtn.type = 'submit';
+    //         addBtn.value = 'Add Hotel';
+    //         addBtn.id = 'add-btn';
+
+    //         // appending add button to table
+    //         table.appendChild(row7);
+    //         row7.appendChild(backBtnData);
+    //         backBtnData.appendChild(backBtn);
+    //         row7.appendChild(addBtnData);
+    //         addBtnData.appendChild(addBtn);
+
+    //         // Clear Fields
+    //         this.clearFields();
+    //     }
+    // }
 
     // remove Form
     removeForm() {
