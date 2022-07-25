@@ -44,15 +44,11 @@ document.addEventListener('click', (event) => {
 
     } else if (target.matches('#add-btn')) {
         // return;
-        if (hotel_name === '' || hotel_location === '' || hotel_phone === '' || hotel_email === '' || hotel_rating === '') {
-
-            // ui.showAlert('Please fill in all fields', 'error');
+        if (hotel_name.value === '' || hotel_location.value === '' || hotel_phone.value === '' || hotel_email.value === '' || hotel_rating.value === '') {
+            ui.showAlert('Please fill in all fields', 'alert error');
         } else {
-
+            // call addHotel function
             addHotel();
-
-            // clear fields
-            ui.clearFields();
         }
     }
     event.preventDefault();
@@ -71,6 +67,9 @@ function addHotel() {
     };
     console.log('app.js hotelData', hotelData);
     hotel.addHotel(hotelData).then(response => {
+        ui.showAlert('Hotel added', 'alert success');
+        ui.clearFields();
+        getHotelList();
         console.log(response);
     }).catch(err => console.log(err));
 }

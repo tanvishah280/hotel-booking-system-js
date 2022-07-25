@@ -259,22 +259,38 @@ class UI {
         });
     }
 
-    // // show alert method
-    // showAlert(message, className) {
-    //     // create div
-    //     const div = document.createElement('div');
-    //     // Add classes
-    //     div.className = `alert ${className}`;
-    //     // Add text 
-    //     div.appendChild(document.createTextNode(message));
-    //     // Get parent
-    //     // const hotelDiv = document.querySelector('.hotel-div');
-    //     const container = document.querySelector('.hotel-div');
-    //     // Get form
-    //     const form = document.getElementById('hotel-add-form');
-    //     // Insert alert before form
-    //     container.insertBefore(div, form);
-    // }
+    // show alert method
+    showAlert(message, className) {
+        this.clearAlert();
+
+        // create div
+        const div = document.createElement('div');
+        // Add classes
+        div.className = `alert ${className}`;
+        // Add text 
+        div.appendChild(document.createTextNode(message));
+        // Get parent
+        // const hotelDiv = document.querySelector('.hotel-div');
+        const container = document.querySelector('.hotel-div');
+        // Get form
+        const form = document.getElementById('hotel-add-form');
+        // Insert alert before form
+        container.insertBefore(div, form);
+
+        // Timeout
+        setTimeout(() => {
+            this.clearAlert();
+        }, 3000);
+    }
+
+    // Clear alert message
+    clearAlert() {
+        const currentAlert = document.querySelector('.alert');
+        // if current alert is already their then remove the alert div
+        if (currentAlert) {
+            currentAlert.remove();
+        }
+    }
 
     // Clear fields
     clearFields() {
