@@ -21,6 +21,7 @@ ui.addHotelForm();
 // Event listener for add hotel
 document.addEventListener('click', (event) => {
 
+    event.preventDefault();
     // console.log(event);
     ui.clearAddIcon();
 
@@ -35,39 +36,57 @@ document.addEventListener('click', (event) => {
 
     let target = event.target;
 
-    console.log('hotel id: ',hotel_id);
-    console.log('hotel name: ',hotel_name);
+    // console.log('hotel id: ', hotel_id.value);
+    // if (!pet_friendly.checked) {
+    //     pet_friendly.checked === 'false';
+
+    //     console.log('IF Pet friendly ', pet_friendly.checked);
+    // } else {
+
+    //     pet_friendly.checked === 'true';
+    //     pet_friendly.click();
+    //     console.log('ELSE Pet friendly ', pet_friendly.checked);
+    // }
+
+    if(target.matches('#pet_friendly')) {
+        console.log(event);  
+    }
 
     // if target matches back button load the list of hotels
-    if (target.matches('#back-btn')) {
+    if (target.matches('#back-btn') || target.matches('#cancel-btn')) {
         ui.removeForm();
         getHotelList();
 
-    } else if (target.matches('#add-btn')) {
-        // return;
-        if (hotel_name.value === '' || hotel_location.value === '' || hotel_phone.value === '' || hotel_email.value === '' || hotel_rating.value === '') {
-            ui.showAlert('Please fill in all fields', 'alert error');
+    } else if (target.matches('#add-btn') || target.matches('#update-btn')) {
+
+        console.log('Inside IF hotel id: ', hotel_id.value);
+
+        if (hotel_id.value === '') {
+            if (hotel_name.value === '' || hotel_location.value === '' || hotel_phone.value === '' || hotel_email.value === '' || hotel_rating.value === '') {
+
+                ui.showAlert('Please fill in all fields', 'alert error');
+            } else {
+                // call addHotel function
+                addHotel();
+            }
         } else {
-            // call addHotel function
-            addHotel();
+            editHotel();
         }
-    } 
-   //  else if (hotel_id !== '') {
-    //     editHotel();
-    // }
-    event.preventDefault();
+    }
+    // event.preventDefault();
 })
 
 
 // addHotel function
 function addHotel() {
+    console.log('Pet Friendly: ', pet_friendly.checked);
     const hotelData = {
         hotel_name: hotel_name.value,
         hotel_location: hotel_location.value,
         hotel_phone: hotel_phone.value,
         hotel_email: hotel_email.value,
         hotel_rating: hotel_rating.value,
-        pet_friendly: pet_friendly.checked
+        pet_friendly: false
     };
     console.log('app.js hotelData', hotelData);
     hotel.addHotel(hotelData).then(response => {
@@ -91,6 +110,7 @@ function editHotel() {
     hotel.editHotel(hotelData).then(results => {
         ui.showAlert('Hotel Updated', 'alert success');
         // ui.changeFormState('add');
+        ui.clearFields();
         console.log(results);
     }).catch(err => console.log(err));
 }
@@ -129,9 +149,10 @@ function enableEdit(event) {
         console.log(hotelData);
 
         if (event.target.parentElement.classList.contains('edit')) {
-            console.log('Inside IF of enableEdit func');
-            ui.addHotelForm(event);
+            console.log('Inside enableEdit: ', event);
+            ui.editHotelForm(event);
             ui.fillForm(hotelData);
+            console.log('Inside IF of enableEdit func');
         }
     }
     event.preventDefault();

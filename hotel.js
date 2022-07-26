@@ -38,7 +38,7 @@ class Hotel {
                     'Content-type': 'application/json'
                 }
             });
-            console.log('hotel id: ',hotelData.hotel_id);
+            console.log('Hotel.js hotel id: ',hotelData.hotel_id);
             return response;
         } catch (err) {
             console.log(err);
